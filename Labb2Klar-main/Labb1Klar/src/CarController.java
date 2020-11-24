@@ -29,8 +29,9 @@ public class CarController {
     public static void main(String[] args) {
         // Instance of this class
         CarController cc = new CarController();
-
-        cc.cars.add(new Volvo240(4, Color.BLUE));
+        Volvo240 volvo = new Volvo240(4, Color.BLUE,300,1600);
+        volvo.setCurrentdirection("east");
+        cc.cars.add(volvo);
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
