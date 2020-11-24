@@ -14,7 +14,17 @@ import java.awt.event.ActionListener;
  **/
 
 public class CarView extends JFrame{
-    private static final int X = 800;
+
+    public static int getBorderX() {
+        return X;
+    }
+
+
+    public static int getBorderY() {
+        return Y;
+    }
+
+    private static final int X = 1600;
     private static final int Y = 800;
 
     // The controller member
@@ -26,7 +36,9 @@ public class CarView extends JFrame{
 
     JPanel gasPanel = new JPanel();
     JSpinner gasSpinner = new JSpinner();
+    JSpinner brakeSpinner = new JSpinner();
     int gasAmount = 0;
+    int brakeAmount=0;
     JLabel gasLabel = new JLabel("Amount of gas");
 
     JButton gasButton = new JButton("Gas");
@@ -68,7 +80,12 @@ public class CarView extends JFrame{
                 gasAmount = (int) ((JSpinner)e.getSource()).getValue();
             }
         });
-
+        brakeSpinner = new JSpinner(spinnerModel);
+        brakeSpinner.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                brakeAmount = (int) ((JSpinner)e.getSource()).getValue();
+            }
+        });
         gasPanel.setLayout(new BorderLayout());
         gasPanel.add(gasLabel, BorderLayout.PAGE_START);
         gasPanel.add(gasSpinner, BorderLayout.PAGE_END);
@@ -99,8 +116,14 @@ public class CarView extends JFrame{
         stopButton.setPreferredSize(new Dimension(X/5-15,200));
         this.add(stopButton);
 
-        // This actionListener is for the gas button only
+        // This actionListener is for the brake button only
         // TODO: Create more for each component as necessary
+        brakeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.brake(brakeAmount);
+            }
+        });
         gasButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
