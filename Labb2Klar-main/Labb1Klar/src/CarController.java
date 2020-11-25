@@ -10,7 +10,7 @@ import java.util.ArrayList;
 * modifying the model state and the updating the view.
  */
 
-public class CarController {
+public class CarController{ //satte C extends Car här
     // member fields:
 
     // The delay (ms) corresponds to 20 updates a sec (hz)
@@ -22,7 +22,7 @@ public class CarController {
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
     // A list of cars, modify if needed
-    ArrayList<Car> cars = new ArrayList<>();
+    ArrayList<Car> cars = new ArrayList<>(); //satte C här
 
     //methods:
 
@@ -34,7 +34,9 @@ public class CarController {
         Scania scania = new Scania(2,Color.black,800,18000);
         volvo.setCurrentdirection("north");
         saab95.setCurrentdirection("east");
+
         scania.setCurrentdirection("west");
+
         cc.cars.add(volvo);
         cc.cars.add(saab95);
         cc.cars.add(scania);
@@ -48,7 +50,7 @@ public class CarController {
     /* Each step the TimerListener moves all the cars in the list and tells the
     * view to update its images. Change this method to your needs.
     * */
-    private class TimerListener implements ActionListener {
+    private class TimerListener implements ActionListener { //Göra if satserna till en metod och anropa, för att göra det snyggare
         public void actionPerformed(ActionEvent e) {
             for (Car car : cars) {
                 if(car.getX()>=frame.getWidth()-100 && car.getCurrentdirection().contains("east")){      //FRÅGA hur vet vi hur stor bilden är, så den studsar på väggen
@@ -88,9 +90,30 @@ public class CarController {
     }
     void brake(int amount) {
         double brake = ((double) amount) / 100;
-        for (Car car : cars
-        ) {
+        for (Car car : cars) {
             car.brake(brake);
+        }
+    }
+    void liftBed(){
+
+
+    }
+    void setBedDown(){
+
+    }
+
+    void setTurboOn(){
+        for(Car car : cars){
+            System.out.println("utanför");
+            if (car.hasTurbo()) {
+                System.out.println("innanför");
+                ((Turboable) car).setTurboOn();
+            }
+        }
+    }
+    void setTurboOff(){
+        for(Car car : cars){
+              //  car.setTurboOff();
         }
     }
 }

@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Saab95 extends  Car {
+public class Saab95 extends  Car implements Turboable{
 
     protected boolean turboOn;
     /** Konstruktor för Saab95
@@ -8,9 +8,10 @@ public class Saab95 extends  Car {
      * @param color färg
      * @param enginePower hästkrafter */
     public Saab95(Integer nrDoors, Color color, double enginePower, int weight) { //ett problem va att man behövde deklarera flera ggr för resp konstruktor
-        super(nrDoors, color, enginePower, weight);
+        super(nrDoors, color, enginePower, weight, true);
         turboOn = false;
         modelName = "Saab95";
+
     }
 
     /**
@@ -18,6 +19,7 @@ public class Saab95 extends  Car {
      */
     public void setTurboOn() {
         turboOn = true;
+        System.out.println("TurboON");
 
     }
 

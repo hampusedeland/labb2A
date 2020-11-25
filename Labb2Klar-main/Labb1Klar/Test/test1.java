@@ -18,7 +18,7 @@ public class test1 {
     @Before
 
     public void init(){
-        saab = new Car(2, Color.red, 125,900);
+        saab = new Car(2, Color.red, 125,900,true);
 
 
 
@@ -88,7 +88,7 @@ public class test1 {
     public void maxCars(){
         transport.setRampDown();
         for(int i=0; i<5;i++){
-            transport.addLoadedCars(new Car(4,Color.BLUE,130,1200));
+            transport.addLoadedCars(new Car(4,Color.BLUE,130,1200,false));
         }
         assertThrows(IllegalArgumentException.class, () -> transport.addLoadedCars(transport));
 
@@ -181,9 +181,9 @@ public class test1 {
 
     @Test
     public void testTurboOff(){
-        saab.setTurboOn();
+       // saab.setTurboOn();
         double noTurbo = saab.speedFactor();
-        saab.setTurboOff();
+      //  saab.setTurboOff();
         double withTurbo = saab.speedFactor();
         int vad = Double.compare(noTurbo,withTurbo);
         assertTrue(vad==0);

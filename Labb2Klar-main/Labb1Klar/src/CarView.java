@@ -67,7 +67,12 @@ public class CarView extends JFrame{
 
         this.add(drawPanel);
 
+        turboOnButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
+            }
+        });
 
         SpinnerModel spinnerModel =
                 new SpinnerNumberModel(0, //initial value
@@ -82,10 +87,13 @@ public class CarView extends JFrame{
         });
         brakeSpinner = new JSpinner(spinnerModel);
         brakeSpinner.addChangeListener(new ChangeListener() {
+            @Override
             public void stateChanged(ChangeEvent e) {
-                brakeAmount = (int) ((JSpinner)e.getSource()).getValue();
+                brakeAmount= (int) ((JSpinner)e.getSource()).getValue();
             }
         });
+
+
         gasPanel.setLayout(new BorderLayout());
         gasPanel.add(gasLabel, BorderLayout.PAGE_START);
         gasPanel.add(gasSpinner, BorderLayout.PAGE_END);
@@ -118,6 +126,31 @@ public class CarView extends JFrame{
 
         // This actionListener is for the brake button only
         // TODO: Create more for each component as necessary
+        liftBedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.liftBed();
+            }
+        });
+        lowerBedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.setBedDown();
+            }
+        });
+        turboOnButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("The turbo is on");
+                carC.setTurboOn();
+            }
+        });
+        turboOffButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.setTurboOff();
+            }
+        });
         brakeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -9,7 +9,7 @@ public class Scania extends Car{
      * @param enginePower
      */
     protected Scania(int nrDoors, Color color, double enginePower, int weight) {
-        super(nrDoors, color, enginePower, weight);
+        super(nrDoors, color, enginePower, weight,false);
         modelName = "Scania340";
     }
     /**default vnikel

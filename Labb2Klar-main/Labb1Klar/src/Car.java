@@ -61,6 +61,13 @@ public class Car implements Movable {
     // public double y=y0;
     private String currentpos; //gjorde till protected
 
+    public Boolean getHasTurbo() {
+        return hasTurbo;
+    }
+
+
+
+    private Boolean hasTurbo;
     /**
      * En konstruktor för bilar generellt med undernämnda parametrar
      * @param nrDoors
@@ -68,7 +75,7 @@ public class Car implements Movable {
      * @param enginePower
      * + stop engine som är en gemensam för bilarna
      */
-    protected Car(int nrDoors, Color color, double enginePower, int weight) { //throw om nrdoors är negativ
+    protected Car(int nrDoors, Color color, double enginePower, int weight, boolean hasTurbo) { //throw om nrdoors är negativ
         if(nrDoors>=0) {
             this.nrDoors = nrDoors;
         }
@@ -79,6 +86,11 @@ public class Car implements Movable {
         stopEngine();
         this.weight=weight;
         this.isLoaded=false;
+        this.hasTurbo=false;
+    }
+
+    public boolean hasTurbo(){
+        return this instanceof Turboable;
     }
 
 
@@ -92,8 +104,7 @@ public class Car implements Movable {
     /**
      *
      */
-    public void setTurboOn() {
-    }
+
     /**
      *
      */
@@ -330,7 +341,5 @@ public class Car implements Movable {
      * Stänger av turbon
      *
      */
-    public void setTurboOff() {
 
-    }
 }

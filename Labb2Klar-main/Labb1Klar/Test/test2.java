@@ -11,7 +11,7 @@ public class test2 {
 
     @Before
     public void init(){
-        volvon = new Car(4, Color.black, 100,1600);
+        volvon = new Car(4, Color.black, 100,1600,false);
     }
 
     @Test
