@@ -3,7 +3,7 @@ import org.w3c.dom.events.EventException;
 import java.awt.*;
 import java.util.*;
 
-public class CarTransport extends Scania {
+public class CarTransport extends Scania  {
 
     /**
      * En konstruktor för Scania biltransport generellt med undernämnda parametrar

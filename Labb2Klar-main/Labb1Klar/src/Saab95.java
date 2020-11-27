@@ -8,7 +8,7 @@ public class Saab95 extends  Car implements Turboable{
      * @param color färg
      * @param enginePower hästkrafter */
     public Saab95(Integer nrDoors, Color color, double enginePower, int weight) { //ett problem va att man behövde deklarera flera ggr för resp konstruktor
-        super(nrDoors, color, enginePower, weight, true);
+        super(nrDoors, color, enginePower, weight, true,false);
         turboOn = false;
         modelName = "Saab95";
 

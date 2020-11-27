@@ -23,23 +23,29 @@ public class CarController{ //satte C extends Car här
     CarView frame;
     // A list of cars, modify if needed
     ArrayList<Car> cars = new ArrayList<>(); //satte C här
-
+    //rara
     //methods:
 
     public static void main(String[] args) { //y-axeln är inverterad, så 0.0 i vänstra hörnet.
         // Instance of this class
         CarController cc = new CarController();
-        Volvo240 volvo = new Volvo240(4, Color.BLUE,300,1600);
+        Volvo240 volvo = new Volvo240(4, Color.BLUE,320,1600);
         Saab95 saab95 = new Saab95(2,Color.gray,400,1800);
         Scania scania = new Scania(2,Color.black,800,18000);
-        volvo.setCurrentdirection("north");
+        Saab95 johannes = new Saab95(2,Color.white,400,1600);
+        scania.setAngleTrBed(0);
+        volvo.setCurrentdirection("east");
         saab95.setCurrentdirection("east");
-
-        scania.setCurrentdirection("west");
-
+        johannes.setCurrentdirection("east");
+        scania.setCurrentdirection("east");
+        saab95.setY(200);
+        scania.setY(400);
+        johannes.setY(600);
         cc.cars.add(volvo);
         cc.cars.add(saab95);
         cc.cars.add(scania);
+        cc.cars.add(johannes);
+
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
 
@@ -52,6 +58,7 @@ public class CarController{ //satte C extends Car här
     * */
     private class TimerListener implements ActionListener { //Göra if satserna till en metod och anropa, för att göra det snyggare
         public void actionPerformed(ActionEvent e) {
+            frame.drawPanel.getArrayList(cars);
             for (Car car : cars) {
                 if(car.getX()>=frame.getWidth()-100 && car.getCurrentdirection().contains("east")){      //FRÅGA hur vet vi hur stor bilden är, så den studsar på väggen
                     car.turnLeft();
@@ -69,13 +76,15 @@ public class CarController{ //satte C extends Car här
                     car.turnLeft();
                     car.turnLeft();
                 }
-                car.move();
+                //car.move(); här var den först
                 int x = (int) Math.round(car.getX());
                 int y = (int) Math.round(car.getY());
 
-                frame.drawPanel.moveit(x, y);
+                //frame.drawPanel.moveit(x, y,car); //ändrar här
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
+                car.move();
+               // frame.drawPanel.paintCar(car);
             }
         }
     }
@@ -95,15 +104,29 @@ public class CarController{ //satte C extends Car här
         }
     }
     void liftBed(){
+        for(Car car : cars){
+            if(car.getHasLift()){
+                if(car.getCurrentSpeed()==0) {
+                    System.out.println("Weee raising my truck bed");
+                    ((Liftable) car).setAngleTrBed(70);
+                }
+                else{
+                    System.out.println("The car must stop, If you want to raise the truck bed");
+                }
 
-
+            }
+        }
     }
     void setBedDown(){
-
+        for(Car car : cars){
+            if(car.getHasLift()){
+                ((Liftable) car).setAngleTrBed(0);
+            }
+        }
     }
 
     void setTurboOn(){
-        for(Car car : cars){
+        for(Car car : cars){ //Kanske en lista med turboable
             System.out.println("utanför");
             if (car.hasTurbo()) {
                 System.out.println("innanför");
@@ -113,7 +136,21 @@ public class CarController{ //satte C extends Car här
     }
     void setTurboOff(){
         for(Car car : cars){
+            if (car.hasTurbo()) {
+                ((Turboable) car).setTurboOff();
+            }
               //  car.setTurboOff();
+        }
+    }
+    void startCars(){
+        for(Car car: cars){
+            car.startEngine();
+        }
+    }
+
+    void stopCars(){
+        for(Car car: cars){
+            car.stopEngine();
         }
     }
 }

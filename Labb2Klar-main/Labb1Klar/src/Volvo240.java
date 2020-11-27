@@ -14,7 +14,7 @@ public class Volvo240 extends Car {
      * @param
      */
     public Volvo240(Integer nrDoors, Color color, double enginePower, int weight){
-        super(nrDoors, color, enginePower,weight,false);
+        super(nrDoors, color, enginePower,weight,false,false);
         modelName = "Volvo240";
     }
     /**

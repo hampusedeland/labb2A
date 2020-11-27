@@ -68,6 +68,10 @@ public class Car implements Movable {
 
 
     private Boolean hasTurbo;
+
+
+
+    private Boolean hasLift;
     /**
      * En konstruktor för bilar generellt med undernämnda parametrar
      * @param nrDoors
@@ -75,7 +79,7 @@ public class Car implements Movable {
      * @param enginePower
      * + stop engine som är en gemensam för bilarna
      */
-    protected Car(int nrDoors, Color color, double enginePower, int weight, boolean hasTurbo) { //throw om nrdoors är negativ
+    protected Car(int nrDoors, Color color, double enginePower, int weight, boolean hasTurbo,boolean hasLift) { //throw om nrdoors är negativ
         if(nrDoors>=0) {
             this.nrDoors = nrDoors;
         }
@@ -90,9 +94,12 @@ public class Car implements Movable {
     }
 
     public boolean hasTurbo(){
-        return this instanceof Turboable;
+        //return getHasTurbo();
+       return this instanceof Turboable;
     }
-
+    public Boolean getHasLift() {
+        return this instanceof Liftable;
+    }
 
 
     /**
@@ -113,7 +120,9 @@ public class Car implements Movable {
      * @return X kordinaten
      */
     public double getX() {
-
+        if(x>800){
+            System.out.println("The car is here: " + modelName);
+        }
         return x;
     }
 
@@ -294,7 +303,7 @@ public class Car implements Movable {
      * @return
      */
     public double speedFactor(){
-        return 1;
+        return getEnginePower()*0.005; //JIdder här, scanians hastighet
     }
 
     /**

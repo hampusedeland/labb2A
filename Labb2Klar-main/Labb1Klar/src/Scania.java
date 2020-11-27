@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Scania extends Car{
+public class Scania extends Car implements Liftable{
     /**
      * En konstruktor för Scania lastbil generellt med undernämnda parametrar
      *
@@ -9,7 +9,7 @@ public class Scania extends Car{
      * @param enginePower
      */
     protected Scania(int nrDoors, Color color, double enginePower, int weight) {
-        super(nrDoors, color, enginePower, weight,false);
+        super(nrDoors, color, enginePower, weight,false,true);
         modelName = "Scania340";
     }
     /**default vnikel
@@ -24,12 +24,14 @@ public class Scania extends Car{
      *
      * @param angleTrBed godtycklig vinkel i intervallet
      */
+
     public void setAngleTrBed(double angleTrBed) {
         if(getAngleTrBed()>=0 && getAngleTrBed()<=70 && getCurrentSpeed()==0) { //maxvinkeln och om lastbilen är still
             this.angleTrBed = angleTrBed;
         }
         else {
-            throw new IllegalArgumentException("Make sure the Truck isn't moving, and the designated angle for the truck bed is between 0-70 degrees");
+           // throw new IllegalArgumentException("Make sure the Truck isn't moving, and the designated angle for the truck bed is between 0-70 degrees");
+            System.out.println("Stop the truck if you want to change the truck bed");
         }
     }
 
@@ -42,7 +44,12 @@ public class Scania extends Car{
             super.move();
         }
         else{
-            throw new IllegalArgumentException("For the truck to move, the truck bed must have a zero angle, the angle (was:"+ getAngleTrBed() + ")");
+           // throw new IllegalArgumentException("For the truck to move, the truck bed must have a zero angle, the angle (was:"+ getAngleTrBed() + ")");
+            //Ovanstående fick programmet att krascha i onödan,
+            System.out.println("Lower the truck bed, if you want to move");
         }
     }
+
+
+
 }

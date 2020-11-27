@@ -1,13 +1,14 @@
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
 // This panel represent the animated part of the view with the car images.
 
-public class DrawPanel extends JPanel{
+public class DrawPanel<image> extends JPanel{
 
     // Just a single image, TODO: Generalize
     BufferedImage volvoImage;
@@ -15,13 +16,19 @@ public class DrawPanel extends JPanel{
     BufferedImage scaniaImage;
     // To keep track of a singel cars position
     Point volvoPoint = new Point();
-    Point saabPoint = new Point();
+    Point saabPoint  = new Point();
     Point scaniaPoint = new Point();
+    Point carPoint = new Point();
+    HashMap<String , BufferedImage > carimages = new HashMap();
+
+    private CarController cc;
+    private Car carRepresentation;
     // TODO: Make this genereal for all cars
-    void moveit(int x, int y){   ///Kanske får hämta in en bil, för att represetera bilens position.
+    void moveit(int x, int y,Car car){   ///Kanske får hämta in en bil, för att represetera bilens position.
         volvoPoint.x = x;
         volvoPoint.y = y;
 
+        //carPoint.x = (int) car.getX();
         saabPoint.x=x;
         saabPoint.y=y;
 
@@ -50,16 +57,44 @@ public class DrawPanel extends JPanel{
         {
             ex.printStackTrace();
         }
+        //HashMap carimages = new HashMap();
+        carimages.put("Volvo240", volvoImage);
+        carimages.put("Saab95", saabImage);
+        carimages.put("Scania340", scaniaImage);
 
+    }
+    public void paintCar(Car c) {
+
+        this.carRepresentation = c;
+        this.repaint();
+    }
+    public void makingHash() {
+
+    }
+    //göra map map.get(modelname)
+    private ArrayList<Car> cars= new ArrayList();
+    public void getArrayList(ArrayList<Car> carsFromAnothermama){
+        cars= carsFromAnothermama;
     }
 
     // This method is called each time the panel updates/refreshes/repaints itself
     // TODO: Change to suit your needs.
     @Override
     protected void paintComponent(Graphics g) {
+
         super.paintComponent(g);
-        g.drawImage(volvoImage, volvoPoint.x, volvoPoint.y, null);
-        g.drawImage(saabImage, saabPoint.x, saabPoint.y+100, null);
-        g.drawImage(scaniaImage, scaniaPoint.x, scaniaPoint.y+200, null);// see javadoc for more info on the parameters
+            for(Car car : cars){
+                g.drawImage(carimages.get(car.modelName),(int)car.getX(),(int)car.getY(),null);
+            }
+           /* if(carRepresentation.modelName.contains("Volvo240")) {
+                g.drawImage(volvoImage, (int) carRepresentation.getX(), (int) carRepresentation.getY(), null);
+            }
+            if(carRepresentation.modelName.contains("Saab95")) {
+                g.drawImage(saabImage,  (int)carRepresentation.getX(), (int) carRepresentation.getY() + 100, null);
+            }
+            if(carRepresentation.modelName.contains("Scania340")) {
+                g.drawImage(scaniaImage,  (int) carRepresentation.getX(), (int) carRepresentation.getY() + 200, null);// see javadoc for more info on the parameters
+            }
+            */
     }
 }
